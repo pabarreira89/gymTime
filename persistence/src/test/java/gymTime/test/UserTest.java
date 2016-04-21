@@ -36,6 +36,7 @@ public class UserTest {
 		user.setFull_name("Pablo");
 		user.setType(user_type.ADM);
 		TransactionUtil.doTransaction(new Transaction() {
+			//@Override
 			public void run(EntityManager em) {
 				em.persist(user);
 			}
@@ -56,12 +57,14 @@ public class UserTest {
 		user.setType(user_type.EMP);
 		
 		TransactionUtil.doTransaction(new Transaction() {
+			//@Override
 			public void run(EntityManager em) {
 				em.persist(user);
 			}
 		}, em);
 
 		TransactionUtil.doTransaction(new Transaction() {
+			//@Override
 			public void run(EntityManager em) {
 				User userRecuperado = em
 						.createQuery("SELECT u FROM User u WHERE u.fullName = 'Ruben'", User.class)
