@@ -1,0 +1,20 @@
+
+<window>
+	<caption>
+		<button label="Inicio">
+			<attribute name="onClick">
+				Executions.sendRedirect("./");
+			</attribute>
+		</button>
+		<button label="Usuarios">
+			<attribute name="onClick">
+				Executions.sendRedirect("users.zul");
+			</attribute>
+		</button>
+		<button label="Clientes">
+			<attribute name="onClick">
+				Executions.sendRedirect("./");
+			</attribute>
+		</button>
+	</caption>
+</window>

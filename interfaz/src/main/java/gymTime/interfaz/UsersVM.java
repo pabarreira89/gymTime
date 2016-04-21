@@ -11,24 +11,24 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.DependsOn;
 import org.zkoss.bind.annotation.NotifyChange;
 
-import gymTime.entities.User;
-import gymTime.entities.User.user_type;
+import gymTime.entities.Employee;
+import gymTime.entities.Employee.user_type;
 import gymTime.interfaz.jpa.DesktopEntityManagerManager;
 import gymTime.util.Transaction;
 import gymTime.util.TransactionUtil;
 
 public class UsersVM {
 	
-	private User currentUser = null;
+	private Employee currentUser = null;
 	private boolean edit = false;
 
 	/**
 	 * Recupera el listado de usuarios
 	 * @return
 	 */
-	public List<User> getUsers() {
+	public List<Employee> getUsers() {
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
-		return em.createQuery("select u from User u", User.class).getResultList();
+		return em.createQuery("select u from User u", Employee.class).getResultList();
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class UsersVM {
 	 */
 	@Command
 	@NotifyChange("users")
-	public void delete(@BindingParam("user") final User u){
+	public void delete(@BindingParam("user") final Employee u){
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
 		TransactionUtil.doTransaction(new Transaction() {
 			//@Override
@@ -69,7 +69,7 @@ public class UsersVM {
 	 * Devuelve el usuario actual a editar, o crear.
 	 * @return
 	 */
-	public User getCurrentPlayer(){
+	public Employee getCurrentPlayer(){
 		return currentUser;
 	}
 	
@@ -117,7 +117,7 @@ public class UsersVM {
 	 */
 	@Command
 	@NotifyChange("currentUser")
-	public void edit(@BindingParam("user") User e){
+	public void edit(@BindingParam("user") Employee e){
 		this.currentUser = e;
 		this.edit = true;
 			
