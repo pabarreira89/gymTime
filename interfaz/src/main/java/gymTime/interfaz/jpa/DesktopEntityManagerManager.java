@@ -1,4 +1,4 @@
-package nflpredator.nflinterface.jpa;
+package gymTime.interfaz.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

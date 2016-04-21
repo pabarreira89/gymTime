@@ -19,7 +19,7 @@ public class Employment {
 	private int employmentId;
 	private ratingJob rating;
 	public static enum ratingJob {
-		Administrator, Employeed
+		Administrator, Employeed, Fired
 	}
 	@Column(columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
@@ -71,7 +71,7 @@ public class Employment {
 	 * Establece el listado de jugadores que tiene el equipo.
 	 * @param players
 	 */
-	public void setPlayers(List<Employee> employees) {
+	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
 
