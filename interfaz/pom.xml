@@ -24,7 +24,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>gymTime</groupId>
-			<artifactId>gymTime</artifactId>
+			<artifactId>persistence</artifactId>
 			<version>${gymTime.version}</version>
 		</dependency>
 		<dependency>
