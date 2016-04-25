@@ -6,14 +6,14 @@
 				Executions.sendRedirect("./");
 			</attribute>
 		</button>
-		<button label="Usuarios">
+		<button label="Empleados">
 			<attribute name="onClick">
-				Executions.sendRedirect("users.zul");
+				Executions.sendRedirect("employees.zul");
 			</attribute>
 		</button>
-		<button label="Clientes">
+		<button label="Trabajo">
 			<attribute name="onClick">
-				Executions.sendRedirect("./");
+				Executions.sendRedirect("employment.zul");
 			</attribute>
 		</button>
 	</caption>

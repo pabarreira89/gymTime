@@ -33,7 +33,7 @@ public class EmployeeVM {
 	 * Recupera el listado de trabajos de empleados
 	 * @return
 	 */
-	public List<Employment> getTeams() {
+	public List<Employment> getEmployments() {
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
 		return em.createQuery("select t from Employment t WHERE t.deleted = 0",Employment.class).getResultList();
 	}
@@ -47,7 +47,7 @@ public class EmployeeVM {
 	public void delete(@BindingParam("employee") final Employee u){
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
 		TransactionUtil.doTransaction(new Transaction() {
-			//@Override
+			@Override
 			public void run(EntityManager em) {
 				em.remove(u);
 			}
@@ -77,7 +77,7 @@ public class EmployeeVM {
 	 */
 	@Command
 	@NotifyChange("currentEmployee")
-	public void newPlayer(){
+	public void newEmployee(){
 		this.currentEmployee = new Employee();
 		this.edit = false;
 	}
@@ -99,7 +99,6 @@ public class EmployeeVM {
 	public void save(){
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
 		TransactionUtil.doTransaction(new Transaction() {
-			//@Override
 			public void run(EntityManager em) {
 				if(!edit)
 				{

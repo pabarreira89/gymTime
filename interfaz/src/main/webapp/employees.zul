@@ -1,0 +1,62 @@
+<zk>
+	<window title="Gym Time">
+		<include src="navigation.zul" />
+		<window title="Edit Users" border="normal"
+			apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('gymTime.interfaz.EmployeeVM')">
+			<window title=" Editor" border="normal" mode="modal"
+				visible="@load(vm.currentEmployee ne null)">
+				Employee: <textbox value="@load(vm.currentEmployee.fullName)  @save(vm.currentEmployee.fullName, before='save')" />
+
+				Employment:
+				<combobox model="@load(vm.employments)"
+					selectedItem="@load(vm.currentEmployee.employment) @save(vm.currentEmployee.employment, before='save')">
+					<template name="model" var="employmentobj">
+						<comboitem label="@load(employmentobj.rating)"
+									value="@load(employmentobj)" />
+					</template>
+				</combobox>
+				
+				<hbox>
+					<button label="save" onClick="@command('save')"></button>
+					<button label="cancel"
+						onClick="@command('cancel')">
+					</button>
+				</hbox>
+			</window>
+			<groupbox mold="3d" closable="false">
+				<caption label="Employee list">
+					<button label="new" onClick="@command('newEmployee')" />
+				</caption>
+				<listbox model="@load(vm.employees)">
+					<listhead>
+						<listheader label="Name" />
+						<listheader label="Employment" />						
+						<listheader label="Actions" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.fullName)" />
+							</listcell>
+							<listcell>
+								<label value="@load(each.employment.rating)" />
+							</listcell>
+							<listcell>
+								<button label="delete"
+									onClick="@command('delete',employee=each)">
+								</button>
+								<button label="edit"
+									onClick="@command('edit',employee=each)">
+								</button>
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+
+				Count:
+				<label value="@load(vm.count)"></label>
+			</groupbox>
+		</window>
+	</window>
+</zk>

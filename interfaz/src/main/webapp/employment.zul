@@ -1,0 +1,111 @@
+<zk>
+	<window title="NFL PREDATOR"
+			apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('VM') @init('gymTime.interfaz.EmploymentVM')">
+		<include src="navigation.zul" />
+		<window title="Edit Teams" border="normal">
+			<window title="Team Editor" border="normal" mode="modal"
+				visible="@load(VM.currentTeam ne null)">
+				Name:
+				<textbox
+					value="@load(VM.currentTeam.name)  @save(VM.currentTeam.name, before='save')">
+				</textbox>
+				City:
+				<textbox
+					value="@load(VM.currentTeam.city)  @save(VM.currentTeam.city, before='save')">
+				</textbox>
+				<hbox>
+					<button label="save" onClick="@command('save')"></button>
+					<button label="cancel"
+						onClick="@command('cancel')">
+					</button>
+				</hbox>
+			</window>
+			<groupbox mold="3d" closable="false">
+				<caption label="Teams list">
+					<button label="new" onClick="@command('newTeam')" />
+				</caption>
+				<listbox model="@load(VM.teams)">
+					<listhead>
+						<listheader label="Name" />
+						<listheader label="City" />
+						<listheader label="Actions" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.name)" />
+							</listcell>
+							<listcell>
+								<label value="@load(each.city)" />
+							</listcell>
+							<listcell>
+								<button label="delete"
+									onClick="@command('delete',team=each)">
+								</button>
+								<button label="edit"
+									onClick="@command('edit',team=each)">
+								</button>
+								<button label="players"
+									onClick="@command('showPlayers',team=each)">
+								</button>
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+				Count: <label value="@load(VM.count)"></label>
+			</groupbox>
+		</window>
+		<window visible="@load(VM.viewTeam ne null)" border="normal">
+			<window title="@load(''.concat(VM.viewTeam.name).concat(' [').concat(VM.viewTeam.city).concat(']'))"
+				border="normal" mode="modal" width="500px" 
+				visible="@load(VM.viewTeam ne null)">
+				<groupbox mold="3d" closable="false">
+					<caption label="Player list">
+						<button label="add" onClick="@command('addPlayer')" />
+						<button label="exit" onClick="@command('cancel')" />
+					</caption>
+					<listbox model="@load(VM.playersFromTeam)">
+						<listhead>
+							<listheader label="Name" />
+							<listheader label="Position" />
+							<listheader label="Status" />
+							<listheader label="Push Out" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell>
+									<label value="@load(each.full_name)" />
+								</listcell>
+								<listcell>
+									<label value="@load(each.position)" />
+								</listcell>
+								<listcell>
+									<label value="@load(each.status)" />
+								</listcell>
+								<listcell>
+									<button label="Push Out"
+										onClick="@command('pushOutPlayer',player=each)"/>
+								</listcell>
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+			</window>
+			<window title="Add players"
+				border="normal" mode="modal" width="500px" 
+				visible="@load(VM.addPlayerToTeam)">
+				<groupbox>
+					<combobox model="@load(VM.players)" selectedItem="@load(VM.newPlayerFromTeam) @save(VM.newPlayerFromTeam, before='savePlayerInTeam')">
+						<template name="model" var="playerobj">
+							<comboitem label="@load(playerobj.full_name)"
+								value="@load(playerobj)" />
+						</template>
+					</combobox>
+					<button label="save" onClick="@command('savePlayerInTeam', player=playerobj)" />
+					<button label="exit" onClick="@command('cancelAddPlayer')" />
+				</groupbox>
+			</window>
+		</window>
+	</window>
+</zk>
